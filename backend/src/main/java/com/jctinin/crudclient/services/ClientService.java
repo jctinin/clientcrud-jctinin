@@ -1,18 +1,23 @@
 package com.jctinin.crudclient.services;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jctinin.crudclient.dto.ClientDTO;
+import com.jctinin.crudclient.entities.Client;
+import com.jctinin.crudclient.repositories.ClientRepository;
 
 
 @Service	
 public class ClientService {
+	
+	@Autowired
+	private ClientRepository clientRepository;
 
-	public Page<ClientDTO> findAllPaged(PageRequest pageRequest) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Client> findAll() {
+		
+		return clientRepository.findAll();
 	}
 
 }
