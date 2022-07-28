@@ -1,9 +1,11 @@
 package com.jctinin.crudclient.services;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jctinin.crudclient.entities.Client;
 import com.jctinin.crudclient.repositories.ClientRepository;
@@ -15,9 +17,12 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 
-	public List<Client> findAll() {
+	@Transactional(readOnly = true)
+	public Page<Client> findAllPaged(PageRequest pageRequest) {
 		
-		return clientRepository.findAll();
+		Page<Client> list = clientRepository.findAll(pageRequest);
+				
+		return list;
 	}
 
 }
