@@ -31,7 +31,6 @@ public class ClientResources {
 		
 		Page<Client> list = clientService.findAllPaged(pageRequest);
 		
-		
 		return ResponseEntity.ok().body(list);
 	}
 }
