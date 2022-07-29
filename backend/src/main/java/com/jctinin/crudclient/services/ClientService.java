@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jctinin.crudclient.dto.ClientDTO;
 import com.jctinin.crudclient.entities.Client;
 import com.jctinin.crudclient.repositories.ClientRepository;
 
@@ -18,11 +19,13 @@ public class ClientService {
 	private ClientRepository clientRepository;
 
 	@Transactional(readOnly = true)
-	public Page<Client> findAllPaged(PageRequest pageRequest) {
+	public Page<ClientDTO> findAllPaged(PageRequest pageRequest) {
 		
 		Page<Client> list = clientRepository.findAll(pageRequest);
+		
+		Page<ClientDTO> result = list.map(element -> new ClientDTO(element));
 				
-		return list;
+		return result;
 	}
 
 }
